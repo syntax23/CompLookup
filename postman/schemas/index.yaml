@@ -1,0 +1,44 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Compromised Password Lookup
+  description: An API to check if an account has compromised passwords
+
+servers:
+  - url: https://api.vrn.co.uk/v1/
+
+# Basic authentication
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+
+
+security:
+  - BasicAuth: []
+paths:
+  /checkComp:
+    get:
+     description: Rerurns 200/201 Y/N
+
+responses:
+      '200':
+        description: Successfully returned a list of artists
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                required:
+                  - username
+      '400':
+        description: Invalid request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:   
+                message:
+                  type: string
